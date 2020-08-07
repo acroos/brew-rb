@@ -21,16 +21,19 @@ module Brew
       Commands::Install.new(brew_path, formula, **kwargs).execute!
     end
 
-    def update(**kwargs)
-      Commands::Update.new(brew_path).execute!(**kwargs)
+    def uninstall(formula, **kwargs)
+      Commands::Uninstall.new(brew_path, formula, **kwargs).execute!
     end
+    alias rm uninstall
+    alias remove uninstall
+
+    def update(**kwargs)
+      Commands::Update.new(brew_path, **kwargs).execute!
+    end
+    alias up update
 
     def upgrade(formula, **kwargs)
-      Commands::Upgrade.new(brew_path).execute!(formula, **kwargs)
-    end
-
-    def uninstall(formula, **kwargs)
-      Commands::Uninstall.new(brew_path).execute!(formula, **kwargs)
+      Commands::Upgrade.new(brew_path, formula, **kwargs).execute!
     end
   end
 end

@@ -60,6 +60,7 @@ Metrics/CyclomaticComplexity:
 Metrics/MethodLength:
   Exclude:
     - 'lib/brew/commands/*.rb'
+    - 'lib/brew.rb'
 
 Metrics/PerceivedComplexity:
   Exclude:
