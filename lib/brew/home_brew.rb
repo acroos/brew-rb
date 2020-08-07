@@ -1,9 +1,14 @@
+# frozen_string_literal: true
+
+require 'English'
+
 module Brew
   class HomeBrewError < StandardError; end
   class HomeBrewNotInstalled < HomeBrewError; end
 
+  # Main class to call 'brew' functions
   class HomeBrew
-    DEFAULT_BREW_PATH = '/usr/local/bin/brew'.freeze
+    DEFAULT_BREW_PATH = '/usr/local/bin/brew'
 
     attr_reader :brew_path
     private :brew_path
@@ -45,13 +50,13 @@ module Brew
 
     def run_command(command)
       IO.popen(command, 'r+') do |io|
-        while line = io.gets
+        while (line = io.gets)
           $stdout.puts line
         end
         io.close
       end
 
-      raise HomeBrewError unless $?.success?
+      raise HomeBrewError unless $CHILD_STATUS.success?
     end
   end
 end

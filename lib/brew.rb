@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'brew/version'
 require 'brew/home_brew'
 
