@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'brew/commands/info'
 require 'brew/commands/install'
 require 'brew/commands/search'
 require 'brew/commands/uninstall'
@@ -16,6 +17,10 @@ module Brew
     def initialize(brew_path: nil)
       @brew_path = brew_path || DEFAULT_BREW_PATH
       raise HomeBrewNotInstalled unless File.executable?(@brew_path)
+    end
+
+    def info(formula, **kwargs)
+      Commands::Info.new(brew_path, formula, **kwargs).execute!
     end
 
     def install(formula, **kwargs)

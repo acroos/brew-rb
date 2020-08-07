@@ -8,6 +8,7 @@ module Brew
       run_with_output(command) do |line|
         $stdout.puts line
       end
+      nil
     end
 
     def get_output(command)

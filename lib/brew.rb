@@ -12,12 +12,14 @@ module Brew
     client = HomeBrew.new(brew_path: brew_path)
 
     case command.to_sym
+    when :info then client.info(formula, **kwargs)
     when :install then client.install(formula, **kwargs)
     when :rm then client.rm(formula, **kwargs)
     when :remove then client.remove(formula, **kwargs)
     when :uninstall then client.uninstall(formula, **kwargs)
-    when :update then client.update(**_kwargs)
-    when :upgrade then client.upgrade(formula, **_kwargs)
+    when :update then client.update(**kwargs)
+    when :up then client.up(**kwargs)
+    when :upgrade then client.upgrade(formula, **kwargs)
     else
       raise NotImplementedError
     end
