@@ -1,9 +1,11 @@
+# frozen_string_literal: false
+
 class String
   def snake_to_kebab
-    self.gsub('_', '-')
+    gsub('_', '-')
   end
 
   def kebab_to_snake
-    self.gsub('-', '_')
+    gsub('-', '_')
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'brew/utils/system_runner'
 
 module Brew
@@ -10,7 +12,7 @@ module Brew
         @system_runner = SystemRunner.new
       end
 
-      def execute!(**kwargs)
+      def execute!(**_kwargs)
         update_command = "#{brew_path} update"
         system_runner.run_command(update_command)
       rescue StandardError => e

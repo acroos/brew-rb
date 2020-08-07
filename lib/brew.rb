@@ -11,10 +11,10 @@ module Brew
   def brew(command, formula = nil, brew_path: nil)
     client = HomeBrew.new(brew_path: brew_path)
     case command.to_sym
-    when :install; client.install(formula)
-    when :update; client.update
-    when :upgrade; client.upgrade(formula)
-    when :uninstall; client.uninstall(formula)
+    when :install then client.install(formula)
+    when :update then client.update
+    when :upgrade then client.upgrade(formula)
+    when :uninstall then client.uninstall(formula)
     else
       raise NotImplementedError
     end

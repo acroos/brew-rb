@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'brew/utils/string_utils'
 require 'brew/utils/system_runner'
 
@@ -22,25 +24,23 @@ module Brew
 
       private
 
-      BOOLEAN_OPTIONS = [
-        :ignore_dependencies, :build_from_source, :force_bottle,
-        :include_test, :devel, :HEAD, :fetch_HEAD, :keep_tmp,
-        :build_bottle, :force, :verbose, :display_times, :git
-      ]
+      BOOLEAN_OPTIONS = %i[
+        ignore_dependencies build_from_source force_bottle
+        include_test devel HEAD fetch_HEAD keep_tmp
+        build_bottle force verbose display_times git
+      ].freeze
 
-      ARGUMENT_OPTIONS = [
-        :env, :only_dependencies, :cc, :bottle_arch
-      ]
-      
+      ARGUMENT_OPTIONS = %i[
+        env only_dependencies cc bottle_arch
+      ].freeze
+
       def parse_args(args)
         option_list = []
 
         BOOLEAN_OPTIONS.each do |option|
           str_option = option.to_s
           kebab_option = str_option.snake_to_kebab
-          if args[option] || args[str_option] || args[kebab_option]
-            option_list << "--#{kebab_option}"
-          end
+          option_list << "--#{kebab_option}" if args[option] || args[str_option] || args[kebab_option]
         end
 
         ARGUMENT_OPTIONS.each do |option|
