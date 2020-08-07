@@ -4,4 +4,12 @@ class String
   def snake_to_kebab
     gsub('_', '-')
   end
+
+  def single_quote
+    "'#{self}'"
+  end
+
+  def squish
+    strip.gsub(/\s+/, ' ')
+  end
 end

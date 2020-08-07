@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'brew/commands/install'
+require 'brew/commands/search'
 require 'brew/commands/uninstall'
 require 'brew/commands/update'
 require 'brew/commands/upgrade'
@@ -19,6 +20,10 @@ module Brew
 
     def install(formula, **kwargs)
       Commands::Install.new(brew_path, formula, **kwargs).execute!
+    end
+
+    def search(text = nil, **kwargs)
+      Commands::Search.new(brew_path, text, **kwargs).execute!
     end
 
     def uninstall(formula, **kwargs)

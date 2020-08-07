@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'brew/utils/string_utils'
 require 'brew/utils/system_runner'
 
 module Brew
@@ -15,8 +16,8 @@ module Brew
       end
 
       def execute!
-        upgrade_command = "#{brew_path} upgrade #{options} '#{formula}'"
-        system_runner.run_command(upgrade_command)
+        upgrade_command = "#{brew_path} upgrade #{options} '#{formula}'".squish
+        system_runner.print_output(upgrade_command)
       rescue StandardError => e
         raise Brew::ExecutionError, e
       end

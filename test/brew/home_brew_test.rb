@@ -33,6 +33,24 @@ module Brew
     end
 
     #
+    # Search
+    #
+    def test_search_calls_brew_search
+      test_command_calls_brew('search', print: false)
+    end
+
+    #
+    # Uninstall
+    #
+    def test_uninstall_calls_brew_uninstall
+      test_command_calls_brew('uninstall')
+    end
+
+    def test_uninstall_raises_execution_error
+      test_brew_raises_error('uninstall')
+    end
+
+    #
     # Update
     #
     def test_update_calls_brew_update
@@ -54,29 +72,22 @@ module Brew
       test_brew_raises_error('upgrade')
     end
 
-    #
-    # Uninstall
-    #
-    def test_uninstall_calls_brew_uninstall
-      test_command_calls_brew('uninstall')
-    end
-
-    def test_uninstall_raises_execution_error
-      test_brew_raises_error('uninstall')
-    end
-
     private
 
     # Use an executable that _should_ always be there
     BREW_PATH = '/bin/cat'.freeze
     FORMULA = 'abc'.freeze
 
-    def test_command_calls_brew(command, with_formula: true)
+    def test_command_calls_brew(command, with_formula: true, print: true)
       expected_command = "#{BREW_PATH} #{command}"
       expected_command << " '#{FORMULA}'" if with_formula
 
       system_runner_mock = Minitest::Mock.new
-      system_runner_mock.expect(:run_command, 0, [expected_command])
+      if print
+        system_runner_mock.expect(:print_output, 0, [expected_command])
+      else
+        system_runner_mock.expect(:get_output, [], [expected_command])
+      end
 
       SystemRunner.stub(:new, system_runner_mock) do
         brew = HomeBrew.new(brew_path: BREW_PATH)
@@ -87,7 +98,7 @@ module Brew
 
     def test_brew_raises_error(command, with_formula: true)
       system_runner_mock = Minitest::Mock.new
-      def system_runner_mock.run_command(_args)
+      def system_runner_mock.print_output(_args)
         raise 'error'
       end
 

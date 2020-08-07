@@ -15,8 +15,8 @@ module Brew
       end
 
       def execute!
-        update_command = "#{brew_path} update #{options}"
-        system_runner.run_command(update_command)
+        update_command = "#{brew_path} update #{options}".squish
+        system_runner.print_output(update_command)
       rescue StandardError => e
         raise Brew::ExecutionError, e
       end

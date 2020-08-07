@@ -16,8 +16,8 @@ module Brew
       end
 
       def execute!
-        install_command = "#{brew_path} install #{options} '#{formula}'"
-        system_runner.run_command(install_command)
+        install_command = "#{brew_path} install #{options} '#{formula}'".squish
+        system_runner.print_output(install_command)
       rescue StandardError => e
         raise Brew::ExecutionError, e
       end

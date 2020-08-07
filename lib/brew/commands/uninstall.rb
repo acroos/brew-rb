@@ -16,8 +16,8 @@ module Brew
       end
 
       def execute!
-        uninstall_command = "#{brew_path} uninstall #{options} '#{formula}'"
-        system_runner.run_command(uninstall_command)
+        uninstall_command = "#{brew_path} uninstall #{options} '#{formula}'".squish
+        system_runner.print_output(uninstall_command)
       rescue StandardError => e
         raise Brew::ExecutionError, e
       end
