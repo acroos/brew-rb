@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'brew/utils/system_runner'
 require 'brew/commands/install'
 require 'brew/commands/uninstall'
 require 'brew/commands/update'
@@ -10,17 +9,16 @@ module Brew
   class HomeBrew
     DEFAULT_BREW_PATH = '/usr/local/bin/brew'
 
-    attr_reader :brew_path, :system_runner
-    private :brew_path, :system_runner
+    attr_reader :brew_path
+    private :brew_path
 
     def initialize(brew_path: nil)
       @brew_path = brew_path || DEFAULT_BREW_PATH
-      @system_runner = SystemRunner.new
       raise HomeBrewNotInstalled unless File.executable?(@brew_path)
     end
 
     def install(formula, **kwargs)
-      Commands::Install.new(brew_path).execute!(formula, **kwargs)
+      Commands::Install.new(brew_path, formula, **kwargs).execute!
     end
 
     def update(**kwargs)
