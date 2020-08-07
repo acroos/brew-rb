@@ -13,9 +13,9 @@ module Brew
     attr_reader :brew_path
     private :brew_path
 
-    def initialize(brew_path: DEFAULT_BREW_PATH)
-      @brew_path = brew_path
-      raise HomeBrewNotInstalled unless File.executable?(brew_path)
+    def initialize(brew_path: nil)
+      @brew_path = brew_path || DEFAULT_BREW_PATH
+      raise HomeBrewNotInstalled unless File.executable?(@brew_path)
     end
 
     def install(formula)
