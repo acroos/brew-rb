@@ -49,6 +49,22 @@ Lint/TopLevelReturnWithArgument:
 Lint/UnreachableLoop:
   Enabled: True
 
+Metrics/AbcSize:
+  Exclude:
+    - 'lib/brew/commands/*.rb'
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - 'lib/brew/commands/*.rb'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'lib/brew/commands/*.rb'
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - 'lib/brew/commands/*.rb'
+
 Style/AccessorGrouping:
   Enabled: True
 
@@ -84,6 +100,10 @@ Style/HashTransformKeys:
 
 Style/HashTransformValues:
   Enabled: True
+
+Style/MixinUsage:
+  Exclude:
+    - 'lib/brew.rb'
 
 Style/OptionalBooleanParameter:
   Enabled: True
