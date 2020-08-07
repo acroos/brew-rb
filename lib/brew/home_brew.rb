@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
-require 'brew/system_runner'
+require 'brew/utils/system_runner'
+require 'brew/commands/install'
+require 'brew/commands/uninstall'
+require 'brew/commands/update'
+require 'brew/commands/upgrade'
 
 module Brew
   class HomeBrew
@@ -15,32 +19,20 @@ module Brew
       raise HomeBrewNotInstalled unless File.executable?(@brew_path)
     end
 
-    def install(formula)
-      install_command = "#{brew_path} install '#{formula}'"
-      system_runner.run_command(install_command)
-    rescue StandardError => e
-      raise ExecutionError, e
+    def install(formula, **kwargs)
+      Commands::Install.new(brew_path).execute!(formula, **kwargs)
     end
 
-    def update
-      update_command = "#{brew_path} update"
-      system_runner.run_command(update_command)
-    rescue StandardError => e
-      raise ExecutionError, e
+    def update(**kwargs)
+      Commands::Update.new(brew_path).execute!(**kwargs)
     end
 
-    def upgrade(formula)
-      update_command = "#{brew_path} upgrade '#{formula}'"
-      system_runner.run_command(update_command)
-    rescue StandardError => e
-      raise ExecutionError, e
+    def upgrade(formula, **kwargs)
+      Commands::Upgrade.new(brew_path).execute!(formula, **kwargs)
     end
 
-    def uninstall(formula)
-      update_command = "#{brew_path} uninstall '#{formula}'"
-      system_runner.run_command(update_command)
-    rescue StandardError => e
-      raise ExecutionError, e
+    def uninstall(formula, **kwargs)
+      Commands::Uninstall.new(brew_path).execute!(formula, **kwargs)
     end
   end
 end
