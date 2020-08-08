@@ -8,15 +8,15 @@ module Brew
     class List
       attr_reader :brew_path, :formulae, :options, :system_runner
 
-      def initialize(brew_path, formulae = [], **kwargs)
+      def initialize(brew_path, *formulae, **kwargs)
         @brew_path = brew_path
-        @formulae = formulae
+        @formulae = formulae.join(' ')
         @options = parse_args(kwargs)
         @system_runner = SystemRunner.new
       end
 
       def execute!
-        list_command = "#{brew_path} list #{options} #{formulae.join(' ')}".squish
+        list_command = "#{brew_path} list #{options} #{formulae}".squish
         system_runner.print_output(list_command)
       rescue StandardError => e
         raise ExecutionError, e

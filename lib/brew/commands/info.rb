@@ -6,17 +6,17 @@ require 'brew/utils/system_runner'
 module Brew
   module Commands
     class Info
-      attr_reader :brew_path, :formula, :options, :system_runner
+      attr_reader :brew_path, :formulae, :options, :system_runner
 
-      def initialize(brew_path, formula, **kwargs)
+      def initialize(brew_path, *formulae, **kwargs)
         @brew_path = brew_path
-        @formula = formula
+        @formulae = formulae.join(' ')
         @options = parse_args(kwargs)
         @system_runner = SystemRunner.new
       end
 
       def execute!
-        info_command = "#{brew_path} info #{options} '#{formula}'".squish
+        info_command = "#{brew_path} info #{options} #{formulae}".squish
         system_runner.print_output(info_command)
       rescue StandardError => e
         raise Brew::ExecutionError, e

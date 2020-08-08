@@ -25,7 +25,7 @@ homebrew = Brew::HomeBrew.new
 ```
 (will raise an exception if `brew` is not installed)
 
-2) Install / Upgrade / Uninstall / Update to your heart's content!
+2) `brew` to your heart's content!
 ```ruby
 homebrew.update
 
@@ -35,6 +35,8 @@ homebrew.upgrade('redis')
 
 homebrew.uninstall('rbenv')
 ```
+
+Available commands are: `info`, `install`, `list`, `uninstall`, `update`, `upgrade`
 (will raise an exception if any of the commands fail)
 
 

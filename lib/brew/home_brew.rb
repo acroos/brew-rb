@@ -20,7 +20,7 @@ module Brew
       raise HomeBrewNotInstalled unless File.executable?(@brew_path)
     end
 
-    def info(formula, **kwargs)
+    def info(formula = [], **kwargs)
       Commands::Info.new(brew_path, formula, **kwargs).execute!
     end
 
@@ -28,8 +28,8 @@ module Brew
       Commands::Install.new(brew_path, formula, **kwargs).execute!
     end
 
-    def list(formula = [], **kwargs)
-      Commands::List.new(brew_path, formula, **kwargs).execute!
+    def list(formulae = [], **kwargs)
+      Commands::List.new(brew_path, formulae, **kwargs).execute!
     end
     alias ls list
 
@@ -48,7 +48,7 @@ module Brew
     end
     alias up update
 
-    def upgrade(formula, **kwargs)
+    def upgrade(formula = [], **kwargs)
       Commands::Upgrade.new(brew_path, formula, **kwargs).execute!
     end
   end

@@ -6,17 +6,17 @@ require 'brew/utils/system_runner'
 module Brew
   module Commands
     class Install
-      attr_reader :brew_path, :formula, :options, :system_runner
+      attr_reader :brew_path, :formulae, :options, :system_runner
 
-      def initialize(brew_path, formula, **kwargs)
+      def initialize(brew_path, *formulae, **kwargs)
         @brew_path = brew_path
-        @formula = formula
+        @formulae = formulae.join(' ')
         @options = parse_args(kwargs)
         @system_runner = SystemRunner.new
       end
 
       def execute!
-        install_command = "#{brew_path} install #{options} '#{formula}'".squish
+        install_command = "#{brew_path} install #{options} #{formulae}".squish
         system_runner.print_output(install_command)
       rescue StandardError => e
         raise Brew::ExecutionError, e

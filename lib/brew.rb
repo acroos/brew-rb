@@ -14,8 +14,8 @@ module Brew
     case command.to_sym
     when :info then client.info(formula, **kwargs)
     when :install then client.install(formula, **kwargs)
-    when :list then client.list(formula || [], **kwargs)
-    when :ls then client.ls(formula || [], **kwargs)
+    when :list then client.list(formula, **kwargs)
+    when :ls then client.ls(formula, **kwargs)
     when :rm then client.rm(formula, **kwargs)
     when :remove then client.remove(formula, **kwargs)
     when :uninstall then client.uninstall(formula, **kwargs)
