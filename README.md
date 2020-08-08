@@ -1,5 +1,7 @@
 # brew
 
+[![Gem Version](https://badge.fury.io/rb/brew.svg)](https://badge.fury.io/rb/brew)
+
 A _very_ simple gem to run some [homebrew](https://brew.sh/) commands from your ruby code.  If the `brew` executable is not installed, the constructor will throw an exception immediately.
 
 ## Installation
