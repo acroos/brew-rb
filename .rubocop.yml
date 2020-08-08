@@ -52,19 +52,23 @@ Lint/UnreachableLoop:
 Metrics/AbcSize:
   Exclude:
     - 'lib/brew/commands/*.rb'
+    - 'lib/brew.rb'
 
 Metrics/CyclomaticComplexity:
   Exclude:
     - 'lib/brew/commands/*.rb'
+    - 'lib/brew.rb'
 
 Metrics/MethodLength:
   Exclude:
     - 'lib/brew/commands/*.rb'
     - 'lib/brew.rb'
+    - 'test/**/*.rb'
 
 Metrics/PerceivedComplexity:
   Exclude:
     - 'lib/brew/commands/*.rb'
+    - 'lib/brew.rb'
 
 Style/AccessorGrouping:
   Enabled: True

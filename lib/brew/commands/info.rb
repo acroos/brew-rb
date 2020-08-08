@@ -26,7 +26,7 @@ module Brew
 
       BOOLEAN_OPTIONS = %i[github json installed all verbose debug].freeze
 
-      ARGUMENT_OPTIONS = %i[analytics days category]
+      ARGUMENT_OPTIONS = %i[analytics days category].freeze
 
       def parse_args(args)
         option_list = []

@@ -27,9 +27,7 @@ module Brew
         io.close
       end
 
-      exit_code = $CHILD_STATUS.exitstatus
-
-      raise "Exited with code #{exit_code}" unless exit_code.zero?
+      raise "Exited with code #{$CHILD_STATUS.exitstatus}" unless $CHILD_STATUS.success?
 
       lines
     end

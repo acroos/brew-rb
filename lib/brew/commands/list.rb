@@ -18,7 +18,7 @@ module Brew
       def execute!
         list_command = "#{brew_path} list #{options} #{formulae.join(' ')}".squish
         system_runner.print_output(list_command)
-      rescue => e
+      rescue StandardError => e
         raise ExecutionError, e
       end
 
@@ -27,7 +27,7 @@ module Brew
       BOOLEAN_OPTIONS = %i[
         full_name unbrewed versions multiple
         pinned cask 1 l r t verbose debug
-      ]
+      ].freeze
 
       def parse_args(args)
         option_list = []
