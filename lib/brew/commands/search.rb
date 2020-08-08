@@ -17,7 +17,7 @@ module Brew
 
       def execute!
         search_command = "#{brew_path} search #{options} #{search_text&.single_quote}".squish
-        search_output = system_runner.get_output(search_command)
+        search_output = system_runner.get_output_lines(search_command)
 
         organize_search_output(search_output)
       rescue StandardError => e

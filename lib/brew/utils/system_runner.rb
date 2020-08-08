@@ -5,13 +5,13 @@ require 'English'
 module Brew
   class SystemRunner
     def print_output(command)
-      run_with_output(command) do |line|
+      lines = run_with_output(command) do |line|
         $stdout.puts line
       end
-      nil
+      lines.join
     end
 
-    def get_output(command)
+    def get_output_lines(command)
       run_with_output(command)
     end
 

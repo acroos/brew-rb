@@ -2,6 +2,7 @@
 
 require 'brew/commands/info'
 require 'brew/commands/install'
+require 'brew/commands/list'
 require 'brew/commands/search'
 require 'brew/commands/uninstall'
 require 'brew/commands/update'
@@ -26,6 +27,11 @@ module Brew
     def install(formula, **kwargs)
       Commands::Install.new(brew_path, formula, **kwargs).execute!
     end
+
+    def list(formula = [], **kwargs)
+      Commands::List.new(brew_path, formula, **kwargs).execute!
+    end
+    alias ls list
 
     def search(text = nil, **kwargs)
       Commands::Search.new(brew_path, text, **kwargs).execute!

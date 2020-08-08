@@ -86,7 +86,7 @@ module Brew
       if print
         system_runner_mock.expect(:print_output, 0, [expected_command])
       else
-        system_runner_mock.expect(:get_output, [], [expected_command])
+        system_runner_mock.expect(:get_output_lines, [], [expected_command])
       end
 
       SystemRunner.stub(:new, system_runner_mock) do
