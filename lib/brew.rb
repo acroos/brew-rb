@@ -27,5 +27,3 @@ module Brew
     end
   end
 end
-
-include Brew
